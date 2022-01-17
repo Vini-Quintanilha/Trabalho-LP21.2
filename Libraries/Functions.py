@@ -1,4 +1,7 @@
-import os
+from tracemalloc import start
+from numpy import source
+from pandas_datareader import data as web
+from datetime import datetime
 
 #Recolhe os nomes da ações de um txt, afim de realizar busca.
 def Lista_Acoes():
@@ -22,4 +25,9 @@ def Busca_Acao(lista, nome):
             return acao
         else:
             return 0
-            
+
+#Obtem valor de uma ação
+def Valor_Acao():
+    pass
+
+Valor_Acao()
