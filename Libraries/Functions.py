@@ -11,6 +11,15 @@ def Lista_Acoes():
 
     return lista
 
-#Verifica se a ação desejada consta na lista
+#Verifica se a ação desejada consta na lista, caso conste será retornado
+#o nome da ação que consta na B3, caso contrário será retornado false
 def Busca_Acao(lista, nome):
-    pass
+    for linha in lista:
+        if nome in linha:
+            linha = str(linha)
+            pos = linha.index('-')+1
+            acao = linha[pos:len(linha)]
+            return acao
+        else:
+            return 0
+            
