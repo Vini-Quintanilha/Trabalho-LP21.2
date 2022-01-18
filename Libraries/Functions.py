@@ -29,4 +29,5 @@ def Busca_Acao(lista, nome):
 def Valor_Acao():
     pass
 
-print(Busca_Acao(Lista_Acoes(), 'BRADESCO'))
+nome = 'azul'
+print(Busca_Acao(Lista_Acoes(), nome.upper()))
