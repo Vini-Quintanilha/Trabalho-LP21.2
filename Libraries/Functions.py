@@ -7,7 +7,7 @@ from datetime import datetime
 def Lista_Acoes():
     lista = []
 
-    with open('Files/Actions.txt', 'r') as arquivo:
+    with open('Files/IBOV.csv', 'r') as arquivo:
         for linha in arquivo:
             lista.append(linha)
         arquivo.close()
@@ -20,14 +20,13 @@ def Busca_Acao(lista, nome):
     for linha in lista:
         if nome in linha:
             linha = str(linha)
-            pos = linha.index('-')+1
-            acao = linha[pos:len(linha)]
+            pos = linha.index(';')+1
+            acao = linha[0:pos-1]
             return acao
-        else:
-            return 0
+    return 0
 
 #Obtem valor de uma ação
 def Valor_Acao():
     pass
 
-Valor_Acao()
+print(Busca_Acao(Lista_Acoes(), 'BRADESCO'))
