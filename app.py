@@ -4,7 +4,7 @@ from tkinter import *
 #Inicializa um Objeto Tk
 app = Tk()
 
-# --------Configuraçãoes da Janela-------- #
+# --------Configurações da Janela-------- #
 
 #Dimensões da janela
 largura = 480
