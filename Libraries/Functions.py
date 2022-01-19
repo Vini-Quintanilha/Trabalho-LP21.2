@@ -1,4 +1,3 @@
-from tracemalloc import start
 from numpy import source
 from pandas_datareader import data as web
 from datetime import datetime
@@ -25,9 +24,10 @@ def Busca_Acao(lista, nome):
             return acao
     return 0
 
-#Obtem valor de uma ação
-def Valor_Acao():
-    pass
+#Obtem uma tabela com os preços do dia atual
+def Valor_Acao(acao):
+    acao = acao + '.SA'
 
-nome = 'azul'
-print(Busca_Acao(Lista_Acoes(), nome.upper()))
+    data_atual = datetime.today().strftime('%m-%d-%y')
+    valor_acao = web.DataReader(acao, data_source='yahoo', start=data_atual)
+    return  valor_acao
