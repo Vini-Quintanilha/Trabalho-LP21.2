@@ -2,7 +2,11 @@ from numpy import source
 from pandas_datareader import data as web
 from datetime import datetime, timedelta
 
-#Recolhe os nomes da ações de um txt, afim de realizar busca.
+#Recolhe os nomes da ações de um csv, afim de realizar busca.
+#OBS: Esse arquivo.csv pode ser encontrado no site da B3, 
+#procurei uma forma de atualizar a cada vez que aplicação fosse executada, 
+#porem não encontrei formas
+#site: https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br
 def Lista_Acoes():
     lista = []
 
@@ -24,22 +28,21 @@ def Busca_Acao(lista, nome):
             return acao
     return 0
 
-#Obtem uma tabela com os preços do dia atual
+#Obtem o valor do dia atual e uma tabela com os ultimos 5 dias (fora finais de semana).
 # --> True para abter apenas o valor da ação no presente momento
-# --> False para obter uma tabela de valores semanal para análise e gráficos
+# --> False para obter uma tabela de valores dos ultimos 5 dias para análise e gráficos
 def Tabela_acao(acao, funcao):
     acao = acao + '.SA'
+    dias = -4
 
     data_atual = datetime.today().strftime('%m-%d-%y')
-    data_final = datetime.today() + timedelta(days=-6)
+    data_final = datetime.today() + timedelta(days=dias)
     data_final = data_final.strftime('%m-%d-%y')
 
     tabela = web.DataReader(acao, data_source='yahoo', start=data_final, end=data_atual)
     
     if funcao == True:
-        #print(len(tabela))
-        #valor = tabela['Close'].iloc[len(tabela)]
-        #print(valor)
-        pass
-
-Tabela_acao('PETR4', True)
+        valor = '{:.2f}'.format(tabela['Close'].iloc[len(tabela) - 1])
+        return valor
+    else:
+        return tabela
