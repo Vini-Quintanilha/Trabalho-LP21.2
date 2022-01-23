@@ -19,6 +19,7 @@ def Lista_Acoes():
 
 #Verifica se a ação desejada consta na lista, caso conste será retornado
 #o nome da ação que consta na B3, caso contrário será retornado false
+"colocar um aviso ou uma opção de inserir novamente"
 def Busca_Acao(lista, nome):
     for linha in lista:
         if nome in linha:
@@ -29,7 +30,7 @@ def Busca_Acao(lista, nome):
     return 0
 
 #Obtem o valor do dia atual e uma tabela com os ultimos 5 dias (fora finais de semana).
-# --> True para abter apenas o valor da ação no presente momento
+# --> True para obter apenas o valor da ação no presente momento
 # --> False para obter uma tabela de valores dos ultimos 5 dias para análise e gráficos
 def Tabela_acao(acao, funcao):
     acao = acao + '.SA'
@@ -46,3 +47,4 @@ def Tabela_acao(acao, funcao):
         return valor
     else:
         return tabela
+

@@ -1,0 +1,37 @@
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt
+import pandas_datareader.data as web
+import seaborn as sns
+Valor = float(input("Quanto deseja investir?"))
+
+ativos():
+contador = 0
+acoes=[]
+    while contador = 0:
+       acoes[0] += input("Qual ação deseja investir?")
+       #conectar com a fução busca_Acao
+       acoes[1]= input("Quantos % da carteira?")
+       
+       "precisa fazer uma conta para n bater mais de 100% aqui e se a conta der 100%ir para a prox função"
+    tickers = acoes[0]
+
+    carteira = yf.download(tickers, period="10y")["Adj Close"]
+
+    ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+dados_yahoo = yf.download(tickers=tickers, period="5y")['Adj Close']
+retorno = dados_yahoo.pct_change()
+retorno_acumulado = (1 + retorno).cumprod()
+retorno_acumulado.iloc[0] = 1
+carteira = Valor * retorno_acumulado.iloc[:, :5]
+carteira["saldo"] = carteira.sum(axis=1)
+carteira["retorno"] = carteira["saldo"].pct_change()
+carteira
+
+Qual ações deseja investir?
+#class ativo:
+ # def __init__(self,nome,porcentagem,setor):
+    # Salva as variáveis como atributos
+  #  self.nome = nome
+   # self.porcentagem = porcentagem
+    #self.setor = setor
