@@ -46,3 +46,7 @@ def Tabela_acao(acao, funcao):
     else:
         tabela = yf.download(acao, period="5d")["Adj Close"]
         return tabela
+
+def Ibovespa():
+    ibov = yf.download('^BVSP', period="7d")["Adj Close"]
+    return ibov
