@@ -14,7 +14,9 @@ def lista():
 
     with open('Files/IBOV.csv', 'r') as arquivo:
         for linha in arquivo:
-            lista.append(linha)
+            pos = linha.index(';')+1
+            acao = linha[0:pos-1]
+            lista.append(acao)
         arquivo.close()
 
     return lista
@@ -50,3 +52,5 @@ def tabela_acao(acao, funcao):
 def ibovespa():
     ibov = yf.download('^BVSP', period="7d")["Adj Close"]
     return ibov
+
+lista()
