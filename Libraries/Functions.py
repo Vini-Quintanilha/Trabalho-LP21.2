@@ -9,7 +9,7 @@ import yfinance as yf
 #procurei uma forma de atualizar a cada vez que aplicação fosse executada, 
 #porem não encontrei formas
 #site: https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br
-def Lista_Acoes():
+def lista():
     lista = []
 
     with open('Files/IBOV.csv', 'r') as arquivo:
@@ -21,7 +21,7 @@ def Lista_Acoes():
 
 #Verifica se a ação desejada consta na lista, caso conste será retornado
 #o nome da ação que consta na B3, caso contrário será retornado false
-def Busca_Acao(lista, nome):
+def busca_Acao(lista, nome):
     for linha in lista:
         if nome in linha:
             linha = str(linha)
@@ -35,7 +35,7 @@ def Busca_Acao(lista, nome):
 #Obtem o valor do dia atual e uma tabela com os ultimos 5 dias (fora finais de semana).
 # --> True para obter apenas o valor da ação no presente momento
 # --> False para obter uma tabela de valores dos ultimos 5 dias para análise e gráficos
-def Tabela_acao(acao, funcao):
+def tabela_acao(acao, funcao):
     acao = acao + '.SA'
 
     if funcao == True:
@@ -47,6 +47,6 @@ def Tabela_acao(acao, funcao):
         tabela = yf.download(acao, period="5d")["Adj Close"]
         return tabela
 
-def Ibovespa():
+def ibovespa():
     ibov = yf.download('^BVSP', period="7d")["Adj Close"]
     return ibov

@@ -1,9 +1,8 @@
-from cProfile import label
-from matplotlib import figure
+from optparse import Values
 from Libraries import Functions
 from tkinter import *
+from tkinter import ttk
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 #Inicializa um Objeto Tk
 app = Tk()
@@ -15,7 +14,7 @@ class Aplicação():
         self.tela()
         self.frame_tela()
         self.label()
-        self.grafico()
+        self.lista_acoes()
         #Loop
         app.mainloop()
     
@@ -50,9 +49,27 @@ class Aplicação():
         self.frame.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
 
     def label(self):
-        label_titulo = Label(self.frame, text = 'Guia de Investimento', font = ('Times', 14, 'italic'))
-        label_titulo.pack()
-    def grafico(self):
-        pass
+        label_titulo = Label(self.frame, text = 'Cotação Ibovespa', font = ('Times', 14, 'italic'))
+        label_titulo.place(relx = 0.325, rely = 0.01)
+
+    def lista_acoes(self):
+        self.lista = ttk.Treeview(self.frame, height = 3, columns = ('col1', 'col2', 'col3'))
+        self.lista.heading('#0', text = '')
+        self.lista.heading('#1', text = 'Data')
+        self.lista.heading('#2', text = 'Nome')
+        self.lista.heading('#3', text = 'Cotação R$')
+
+        self.lista.column('#0', width = 1)
+        self.lista.column('#1', width = 50)
+        self.lista.column('#2', width = 200)
+        self.lista.column('#3', width = 100)
+
+        #Adicionar nomes das ações na treeview
+        
+        self.lista.place(relx = 0.05, rely = 0.07, relwidth = 0.9, relheight = 0.25)
+
+        self.scrol_lista = Scrollbar(self.frame, orient = 'vertical')
+        self.lista.configure(yscroll=self.scrol_lista.set)
+        self.scrol_lista.place(relx = 0.95, rely = 0.07, relwidth = 0.03, relheight = 0.25)
 
 Aplicação()
