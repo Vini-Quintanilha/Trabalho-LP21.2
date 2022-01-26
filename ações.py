@@ -17,27 +17,39 @@ def grafico_ibov():
 grafico_ibov()
 
 
-"""Valor = float(input("Quanto deseja investir?"))
-
 def ativos():
    contador = 0
    acoes = []
-            "precisa fazer uma conta para n bater mais de 100% aqui e se a conta der 100% ir para a prox função"
+   lista = lista()
+           
 
-   while contador != 1:
-      if contador < 1:
+   while contador != 100:
+      if contador < 100:
+        acao = input("Qual ação deseja investir?")
+        for linha in lista:
+          if acao in linha:
+             acao += ".SA"
+             append.acoes[0](acao)
+            append.acoes[1](float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)")))
+            contador += (float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)"))
+        break
 
-         acoes[0] += input("Qual ação deseja investir?")
-         #conectar com a fução busca_Acao
-         append.acoes[1](float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)")))
+      else:
+        contador = 0
+        print("Insira novamente")
+        break
+         return acoes
 
-         contador += (float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)"))
+      
 
-         tickers = acoes[0]
 
-         carteira = yf.download(tickers, period="10y")["Adj Close"]
+"""Valor = float(input("Quanto deseja investir?"))
+  # tickers = acoes[0]
 
-         ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+         #carteira = yf.download(tickers, period="10y")["Adj Close"]
+
+        # ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+
 
    dados_yahoo = yf.download(tickers=tickers, period="5y")['Adj Close']
    retorno = dados_yahoo.pct_change()
