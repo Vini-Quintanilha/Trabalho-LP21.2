@@ -2,10 +2,22 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader.data as web
-import seaborn as sns
+from datetime import datetime, timedelta
 import yfinance as yf
 
-Valor = float(input("Quanto deseja investir?"))
+def grafico_ibov():
+   ibov = web.get_data_yahoo('^BVSP')
+   ibov = ibov[(ibov.index.year >= 2020)]
+   plt.title(' TÍTULO ')
+   x = ibov["Close"].plot(figsize=(22,8), label="IBOV",linewidth=3.0)
+   plt.ylabel('Valorização')
+   plt.xlabel('Ano')
+   plt.legend(loc='best')
+   print(x)
+grafico_ibov()
+
+
+"""Valor = float(input("Quanto deseja investir?"))
 
 def ativos():
    contador = 0
@@ -42,4 +54,4 @@ def ativos():
     # Salva as variáveis como atributos
   #  self.nome = nome
    # self.porcentagem = porcentagem
-    #self.setor = setor
+    #self.setor = setor"""
