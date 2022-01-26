@@ -10,18 +10,22 @@ Valor = float(input("Quanto deseja investir?"))
 def ativos():
    contador = 0
    acoes = []
+            "precisa fazer uma conta para n bater mais de 100% aqui e se a conta der 100% ir para a prox função"
 
-   while contador == 0:
-       acoes[0] += input("Qual ação deseja investir?")
-       #conectar com a fução busca_Acao
-       acoes[1]= input("Quantos % da carteira?")
-       
-       "precisa fazer uma conta para n bater mais de 100% aqui e se a conta der 100%ir para a prox função"
-       tickers = acoes[0]
- 
-       carteira = yf.download(tickers, period="10y")["Adj Close"]
+   while contador != 1:
+      if contador < 1:
 
-       ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+         acoes[0] += input("Qual ação deseja investir?")
+         #conectar com a fução busca_Acao
+         append.acoes[1](float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)")))
+
+         contador += (float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)"))
+
+         tickers = acoes[0]
+
+         carteira = yf.download(tickers, period="10y")["Adj Close"]
+
+         ibov = yf.download("^BVSP", period="10y")["Adj Close"]
 
    dados_yahoo = yf.download(tickers=tickers, period="5y")['Adj Close']
    retorno = dados_yahoo.pct_change()
