@@ -3,6 +3,7 @@ from pandas_datareader import data as web
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import yfinance as yf
+import pandas as pd
 
 #Recolhe os nomes da ações de um csv, afim de realizar busca.
 #OBS: Esse arquivo.csv pode ser encontrado no site da B3, 
