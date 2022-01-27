@@ -16,6 +16,10 @@ def grafico_ibov():
    print(x)
 grafico_ibov()
 
+def valorização_por_ativo():
+  carteira_valorização = (carteira / carteira.iloc[0])
+  x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
+  return(x)
 
 def ativos():
    contador = 0
