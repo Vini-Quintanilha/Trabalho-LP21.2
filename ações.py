@@ -44,19 +44,20 @@ def ativos():
         break
          return acoes
 
-      """def teste():
+def teste():
   Valor_investido = 100000
   acoes = [["ABEV3.SA", "ITSA4.SA","WEGE3.SA", "USIM5.SA", "VALE3.SA"],[0.1,0.2,0.3,0.2,0.2]]
+  carteira_valorização = (carteira / carteira.iloc[0])
   for i in range(5):
     acaomuda = acoes[0][i]
-    multiplicador = acoes[1][i]*Valor_investido
+    multiplicador = acoes[1][i]
     carteira_valorização[acaomuda] = carteira_valorização[acaomuda].mul(multiplicador) 
-  print(carteira_valorização)
   carteira_valorização["saldo"] = carteira_valorização.sum(axis=1)
-  ibov_valorização = (ibov / ibov.iloc[0])*Valor_investido
+  ibov_valorização = (ibov / ibov.iloc[0])
   carteira_valorização["saldo"].plot(figsize=(18,8), label="Minha Carteira")
   ibov_valorização.plot(label="IBOV")
-  plt.legend();"""
+  plt.legend();
+  print(carteira_valorização)
 
 
 """Valor = float(input("Quanto deseja investir?"))
