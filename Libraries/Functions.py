@@ -17,9 +17,14 @@ def lista():
             pos = linha.index(';')+1
             acao = linha[0:pos-1]
             lista.append(acao)
+            nome = linha[1:pos-1]
+            tabela = pd.DataFrame(list(zip(nome,acao)), columns = ['Ticker','Nome'])
         arquivo.close()
 
-    return lista
+    return tabela
+
+lst = ["Jay","Raj","Jack"]
+df = pd.DataFrame(lst, columns = ['Name'])
 
 #Verifica se a ação desejada consta na lista, caso conste será retornado
 #o nome da ação que consta na B3, caso contrário será retornado false
@@ -50,7 +55,8 @@ def tabela_acao(acao, funcao):
         return tabela
 
 def ibovespa():
-    ibov = yf.download('^BVSP', period="7d")["Adj Close"]
-    return ibov
+    ibov = yf.download('^BVSP', period="7y")["Adj Close"]
+    print(ibov)
 
+ 
 lista()
