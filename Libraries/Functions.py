@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import yfinance as yf
 import pandas as pd
+
 #Recolhe os nomes da ações de um csv, afim de realizar busca.
 #OBS: Esse arquivo.csv pode ser encontrado no site da B3, 
 #procurei uma forma de atualizar a cada vez que aplicação fosse executada, 
@@ -22,9 +23,6 @@ def lista():
         arquivo.close()
 
     return tabela
-
-lst = ["Jay","Raj","Jack"]
-df = pd.DataFrame(lst, columns = ['Name'])
 
 #Verifica se a ação desejada consta na lista, caso conste será retornado
 #o nome da ação que consta na B3, caso contrário será retornado false

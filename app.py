@@ -95,7 +95,10 @@ class Aplicação():
         self.lista.column('#2', width = 90)
         self.lista.column('#3', width = 60)
 
-        #Adicionar nomes das ações na treeview
+        #Edita aqui
+        lista = []
+        lista = Functions.lista()
+        self.lista.insert('', END, values = lista)
         
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.3, relheight = 0.25)
 
