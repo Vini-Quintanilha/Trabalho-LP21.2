@@ -16,6 +16,7 @@ class Aplicação():
         self.label()
         self.widgets()
         self.treeview()
+        self.button()
         #Loop
         app.mainloop()
     
@@ -70,29 +71,29 @@ class Aplicação():
 
 
     def widgets(self):
-        entry_1 = Entry()
-        entry_1.place(relx = 0.1, rely = 0.115, relwidth = 0.2, relheight = 0.021)
+        self.entry_1 = Entry()
+        self.entry_1.place(relx = 0.1, rely = 0.115, relwidth = 0.2, relheight = 0.021)
 
-        entry_2 = Entry()
-        entry_2.place(relx = 0.1, rely = 0.173, relwidth = 0.1, relheight = 0.021)
+        self.entry_2 = Entry()
+        self.entry_2.place(relx = 0.1, rely = 0.173, relwidth = 0.1, relheight = 0.021)
 
-        entry_3 = Entry()
-        entry_3.place(relx = 0.1, rely = 0.546, relwidth = 0.1, relheight = 0.021)
+        self.entry_3 = Entry()
+        self.entry_3.place(relx = 0.1, rely = 0.546, relwidth = 0.1, relheight = 0.021)
 
-        entry_4 = Entry()
-        entry_4.place(relx = 0.1, rely = 0.609, relwidth = 0.05, relheight = 0.021)
+        self.entry_4 = Entry()
+        self.entry_4.place(relx = 0.1, rely = 0.609, relwidth = 0.05, relheight = 0.021)
 
     def treeview(self):
         self.lista = ttk.Treeview(self.frame, height = 3, columns = ('col1', 'col2', 'col3'))
         self.lista.heading('#0', text = '')
-        self.lista.heading('#1', text = 'Data')
-        self.lista.heading('#2', text = 'Nome')
+        self.lista.heading('#1', text = 'Nome')
+        self.lista.heading('#2', text = 'Índice')
         self.lista.heading('#3', text = 'Cotação R$')
 
         self.lista.column('#0', width = 1)
-        self.lista.column('#1', width = 20)
-        self.lista.column('#2', width = 120)
-        self.lista.column('#3', width = 50)
+        self.lista.column('#1', width = 40)
+        self.lista.column('#2', width = 90)
+        self.lista.column('#3', width = 60)
 
         #Adicionar nomes das ações na treeview
         
@@ -104,5 +105,23 @@ class Aplicação():
 
         self.carteiras = ttk.Treeview(self.frame)
         self.carteiras.place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.25)
+
+    def button(self):
+        button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
+        button_1.place(relx = 0.35, rely = 0.154, relwidth = 0.05, relheight = 0.04)
+
+        button_2 = Button(self.frame, text = 'Enviar', command = self.button_function_2)
+        button_2.place(relx = 0.35, rely = 0.59, relwidth = 0.05, relheight = 0.04)
+    
+    def button_function_1(self):
+        nome = self.entry_1.get()
+        capital = self.entry_2.get()
+    
+    def button_function_2(self):
+        acao = self.entry_3.get()
+        porcentagem = self.entry_4.get()
+
+        #self.entry_3.delete
+        #self.entry_4.option_clear()
 
 Aplicação()
