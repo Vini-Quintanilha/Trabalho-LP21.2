@@ -17,6 +17,7 @@ class Aplicação():
         self.porcentagem = []
         self.nome = []
         self.capital = []
+        self.porcentagem_restante = 100
 
         self.tela()
         self.frame_tela()
@@ -29,7 +30,7 @@ class Aplicação():
         #Loop
         app.mainloop()
 
-    #Configurações da Janela
+    # --------------> Configurações da Janela <-------------- #
     def tela(self):
         #Dimensões do screen
         self.largura_screen = app.winfo_screenwidth()
@@ -52,6 +53,7 @@ class Aplicação():
         #Trava o redimensionamento da janela
         self.app.resizable(False, False)
 
+    # --------------> Parte Visual <-------------- #
     def frame_tela(self):
         self.frame = Frame(self.app)
         self.frame.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
@@ -81,6 +83,8 @@ class Aplicação():
         label_dados = Label(self.frame, text = 'Ações da Carteira', font = ('Times', 12, 'bold'))
         label_dados.place(relx = 0.065, rely = 0.65, relwidth = 0.2, relheight = 0.026)
 
+        label_acao = Label(self.frame, text = '{}%'.format(self.porcentagem_restante), font = ('Times', 12))
+        label_acao.place(relx = 0.22, rely = 0.545, relwidth = 0.2, relheight = 0.026)         
 
     def widgets(self):
         self.entry_1 = Entry()
@@ -131,23 +135,32 @@ class Aplicação():
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
         button_1.place(relx = 0.35, rely = 0.154, relwidth = 0.05, relheight = 0.04)
-
+        
         button_2 = Button(self.frame, text = 'Enviar', command = self.button_function_2)
         button_2.place(relx = 0.35, rely = 0.59, relwidth = 0.05, relheight = 0.04)
     
+    # --------------> Funções <-------------- #
     def button_function_1(self):
         self.nome.append(self.entry_1.get())
         self.capital.append(self.entry_2.get())
 
-    
     def button_function_2(self):
-        self.indice.append(self.entry_3.get())
-        self.porcentagem.append(self.entry_4.get())
+        if self.porcentagem_restante != 0:
+            self.indice.append(self.entry_3.get())
+            self.porcentagem.append(self.entry_4.get())
 
-        self.entry_3.delete(0, END)
-        self.entry_4.delete(0, END)
+            self.entry_3.delete(0, END)
+            self.entry_4.delete(0, END)
 
-        self.graficos(self.indice, self.porcentagem)
-    
+            self.graficos(self.indice, self.porcentagem)
+            self.porcentagem_()
+
+        label_acao = Label(self.frame, text = '{}%'.format(self.porcentagem_restante), font = ('Times', 12))
+        label_acao.place(relx = 0.22, rely = 0.545, relwidth = 0.2, relheight = 0.026) 
+
+    def porcentagem_(self):
+        pos = len(self.porcentagem)
+        porcentagem = int(self.porcentagem[pos - 1])
+        self.porcentagem_restante = self.porcentagem_restante - porcentagem
 
 Aplicação()
