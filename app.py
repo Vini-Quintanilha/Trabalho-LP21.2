@@ -1,5 +1,4 @@
 from optparse import Values
-from Libraries import Functions
 from tkinter import *
 from tkinter import ttk
 import numpy as np
@@ -14,16 +13,22 @@ app = Tk()
 class Aplicação():
     def __init__(self):
         self.app = app
+        self.indice = []
+        self.porcentagem = []
+        self.nome = []
+        self.capital = []
+
         self.tela()
         self.frame_tela()
         self.label()
         self.widgets()
         self.treeview()
         self.button()
-        self.graficos()
+        self.graficos(self.indice, self.porcentagem)
+
         #Loop
         app.mainloop()
-    
+
     #Configurações da Janela
     def tela(self):
         #Dimensões do screen
@@ -67,6 +72,9 @@ class Aplicação():
         label_acao = Label(self.frame, text = 'Digite uma Ação:', font = ('Times', 12))
         label_acao.place(relx = 0.054, rely = 0.515, relwidth = 0.2, relheight = 0.026)
 
+        label_acao = Label(self.frame, text = 'Capital Disponível:', font = ('Times', 12))
+        label_acao.place(relx = 0.22, rely = 0.515, relwidth = 0.2, relheight = 0.026)        
+
         label_porcentagem = Label(self.frame, text = 'Porcentagem de Capital:', font = ('Times', 12))
         label_porcentagem.place(relx = 0.077, rely = 0.58, relwidth = 0.2, relheight = 0.026)
 
@@ -105,20 +113,18 @@ class Aplicação():
         self.lista.configure(yscroll=self.scrol_lista.set)
         self.scrol_lista.place(relx = 0.4, rely = 0.253, relwidth = 0.03, relheight = 0.25)
     
-    def graficos(self):
+    def graficos(self, indice, porcentagem):
         figura = Figure(figsize = (8, 4), dpi = 60)
         ax1 = figura.add_subplot(111)
-        
+
+        ax1.pie(porcentagem, labels = indice, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+
+        ax1.set_title('{}'.format(self.nome))
+        ax1.axis('equal')
+
         canvas = FigureCanvasTkAgg(figura, self.frame)
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
-
-        for x in len(self.lista):
-            labels = self.lista[x]
-            sizes = [15, 30, 45, 10]
-
-        ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
-                shadow=True, startangle=90)
-        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
 
 
@@ -130,19 +136,18 @@ class Aplicação():
         button_2.place(relx = 0.35, rely = 0.59, relwidth = 0.05, relheight = 0.04)
     
     def button_function_1(self):
-        lista = []
-
-        self.lista.append(self.entry_1.get())
-        self.lista.append(self.entry_2.get())
+        self.nome.append(self.entry_1.get())
+        self.capital.append(self.entry_2.get())
 
     
     def button_function_2(self):
-        self.lista = []
-
-        self.lista.append(self.entry_3.get())
-        self.lista.append(self.entry_4.get())
+        self.indice.append(self.entry_3.get())
+        self.porcentagem.append(self.entry_4.get())
 
         self.entry_3.delete(0, END)
         self.entry_4.delete(0, END)
+
+        self.graficos(self.indice, self.porcentagem)
+    
 
 Aplicação()

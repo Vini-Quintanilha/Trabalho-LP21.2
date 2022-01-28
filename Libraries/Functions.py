@@ -28,8 +28,6 @@ def lista():
         lst_cotacao = []
         for empresa in tickers_empresas:
             cotacao = yf.download(empresa, period="1d")["Adj Close"]
-            lst_cotacao.append(cotacao)
-            print(lst_cotacao)
             
     return tabela
 
@@ -67,5 +65,3 @@ def busca_Acao(lista, nome):
 def ibovespa():
     ibov = yf.download('^BVSP', period="7y")["Adj Close"]
     print(ibov)
-
-lista()
