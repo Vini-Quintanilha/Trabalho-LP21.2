@@ -2,7 +2,10 @@ from optparse import Values
 from Libraries import Functions
 from tkinter import *
 from tkinter import ttk
+import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure 
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 #Inicializa um Objeto Tk
 app = Tk()
@@ -17,6 +20,7 @@ class Aplicação():
         self.widgets()
         self.treeview()
         self.button()
+        self.graficos()
         #Loop
         app.mainloop()
     
@@ -94,22 +98,29 @@ class Aplicação():
         self.lista.column('#1', width = 40)
         self.lista.column('#2', width = 90)
         self.lista.column('#3', width = 60)
-
-        #Edita aqui
-        lista = []
-        lista = Functions.lista()
-        #self.lista.insert('', END, values = lista)
         
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.3, relheight = 0.25)
 
         self.scrol_lista = Scrollbar(self.frame, orient = 'vertical')
         self.lista.configure(yscroll=self.scrol_lista.set)
         self.scrol_lista.place(relx = 0.4, rely = 0.253, relwidth = 0.03, relheight = 0.25)
+    
+    def graficos(self):
+        figura = Figure(figsize = (8, 4), dpi = 60)
+        ax1 = figura.add_subplot(111)
+        
+        canvas = FigureCanvasTkAgg(figura, self.frame)
+        canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
 
-        '''
-        self.carteiras = ttk.Treeview(self.frame)
-        self.carteiras.place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.25)
-        '''
+        for x in len(self.lista):
+            labels = self.lista[x]
+            sizes = [15, 30, 45, 10]
+
+        ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
+                shadow=True, startangle=90)
+        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+
 
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
@@ -119,17 +130,17 @@ class Aplicação():
         button_2.place(relx = 0.35, rely = 0.59, relwidth = 0.05, relheight = 0.04)
     
     def button_function_1(self):
-        self.lista = []
+        lista = []
 
         self.lista.append(self.entry_1.get())
         self.lista.append(self.entry_2.get())
 
     
     def button_function_2(self):
-        lista = []
+        self.lista = []
 
-        lista.append(self.entry_3.get())
-        lista.append(self.entry_4.get())
+        self.lista.append(self.entry_3.get())
+        self.lista.append(self.entry_4.get())
 
         self.entry_3.delete(0, END)
         self.entry_4.delete(0, END)

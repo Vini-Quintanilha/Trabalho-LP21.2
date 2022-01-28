@@ -1,3 +1,4 @@
+from time import sleep
 from numpy import source
 from pandas_datareader import data as web
 from datetime import datetime, timedelta
@@ -28,7 +29,8 @@ def lista():
         for empresa in tickers_empresas:
             cotacao = yf.download(empresa, period="1d")["Adj Close"]
             lst_cotacao.append(cotacao)
-        tabela["cotação"] = 'lst_cotacao'
+            print(lst_cotacao)
+            
     return tabela
 
 
@@ -66,5 +68,4 @@ def ibovespa():
     ibov = yf.download('^BVSP', period="7y")["Adj Close"]
     print(ibov)
 
- 
 lista()
