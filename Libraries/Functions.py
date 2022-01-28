@@ -12,7 +12,8 @@ import pandas as pd
 #site: https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br
 def lista():
     lista = []
-
+    data_atual = datetime.today().strftime('%m-%d-%y')
+    
     with open('Files/IBOV.csv', 'r') as arquivo:
         for linha in arquivo:
             pos = linha.index(';')+1
@@ -25,9 +26,9 @@ def lista():
         tickers_empresas = tabela['Ticker']
         lst_cotacao = []
         for empresa in tickers_empresas:
-            cotacao = web.DataReader(empresa, data_source='yahoo', start=data_atual)
+            cotacao = yf.download(empresa, period="1d")["Adj Close"]
             lst_cotacao.append(cotacao)
-            tabela["cotação"] = lst_cotacao
+        tabela["cotação"] = 'lst_cotacao'
     return tabela
 
 
@@ -45,7 +46,7 @@ def tabela_acao(acao, funcao):
     else:
         tabela = yf.download(acao, period="5d")["Adj Close"]
         return tabela
-    tabela["cotação"] = 
+
 #Verifica se a ação desejada consta na lista, caso conste será retornado
 #o nome da ação que consta na B3, caso contrário será retornado false
 def busca_Acao(lista, nome):

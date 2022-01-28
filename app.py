@@ -66,8 +66,8 @@ class Aplicação():
         label_porcentagem = Label(self.frame, text = 'Porcentagem de Capital:', font = ('Times', 12))
         label_porcentagem.place(relx = 0.077, rely = 0.58, relwidth = 0.2, relheight = 0.026)
 
-        label_dados = Label(self.frame, text = 'Carteiras Anteriores:', font = ('Times', 12, 'bold'))
-        label_dados.place(relx = 0.075, rely = 0.65, relwidth = 0.2, relheight = 0.026)
+        label_dados = Label(self.frame, text = 'Ações da Carteira', font = ('Times', 12, 'bold'))
+        label_dados.place(relx = 0.065, rely = 0.65, relwidth = 0.2, relheight = 0.026)
 
 
     def widgets(self):
@@ -98,7 +98,7 @@ class Aplicação():
         #Edita aqui
         lista = []
         lista = Functions.lista()
-        self.lista.insert('', END, values = lista)
+        #self.lista.insert('', END, values = lista)
         
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.3, relheight = 0.25)
 
@@ -106,8 +106,10 @@ class Aplicação():
         self.lista.configure(yscroll=self.scrol_lista.set)
         self.scrol_lista.place(relx = 0.4, rely = 0.253, relwidth = 0.03, relheight = 0.25)
 
+        '''
         self.carteiras = ttk.Treeview(self.frame)
         self.carteiras.place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.25)
+        '''
 
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
@@ -117,14 +119,19 @@ class Aplicação():
         button_2.place(relx = 0.35, rely = 0.59, relwidth = 0.05, relheight = 0.04)
     
     def button_function_1(self):
-        nome = self.entry_1.get()
-        capital = self.entry_2.get()
+        self.lista = []
+
+        self.lista.append(self.entry_1.get())
+        self.lista.append(self.entry_2.get())
+
     
     def button_function_2(self):
-        acao = self.entry_3.get()
-        porcentagem = self.entry_4.get()
+        lista = []
 
-        #self.entry_3.delete
-        #self.entry_4.option_clear()
+        lista.append(self.entry_3.get())
+        lista.append(self.entry_4.get())
+
+        self.entry_3.delete(0, END)
+        self.entry_4.delete(0, END)
 
 Aplicação()
