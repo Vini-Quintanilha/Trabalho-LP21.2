@@ -15,17 +15,30 @@ def grafico_ibov():
    plt.legend(loc='best')
    print(x)
 grafico_ibov()
+
  #----------------------------- carteira-------------------------
 def carteira(tickers):
    for i in range(len(tickers)):
       tickers[i] = tickers[i] + '.SA'
    carteira = yf.download(tickers, period="10y")["Adj Close"]
    return carteira
-   
+
+#----------------------------- carteira Valorização-------------------------
+def carteira_valorização(tickers):
+   for i in range(len(tickers)):
+      tickers[i] = tickers[i] + '.SA'
+   carteira = yf.download(tickers, period="10y")["Adj Close"]
+   valorização = carteira / carteira.iloc[0]
+   return valorização
    #----------------------------- ibov-------------------------
 def ibov():
    ibov = yf.download("^BVSP", period="10y")["Adj Close"]
    return ibov
+     #----------------------------- ibov Valorização-------------------------
+def ibov_valorização():
+   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+   ibov_valorização = ibov / ibov.iloc[0]
+   return ibov_valorização
 
 
 def valorização_por_ativo():
