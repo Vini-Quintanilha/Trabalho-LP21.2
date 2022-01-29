@@ -131,7 +131,6 @@ class Aplicação():
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
 
 
-
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
         button_1.place(relx = 0.35, rely = 0.154, relwidth = 0.05, relheight = 0.04)

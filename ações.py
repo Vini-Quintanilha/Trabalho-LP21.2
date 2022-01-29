@@ -15,6 +15,18 @@ def grafico_ibov():
    plt.legend(loc='best')
    print(x)
 grafico_ibov()
+ #----------------------------- carteira-------------------------
+def carteira(tickers):
+   for i in range(len(tickers)):
+      tickers[i] = tickers[i] + '.SA'
+   carteira = yf.download(tickers, period="10y")["Adj Close"]
+   return carteira
+   
+   #----------------------------- ibov-------------------------
+def ibov():
+   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+   return ibov
+
 
 def valorização_por_ativo():
   carteira_valorização = (carteira / carteira.iloc[0])
@@ -57,7 +69,7 @@ def teste():
   carteira_valorização["saldo"].plot(figsize=(18,8), label="Minha Carteira")
   ibov_valorização.plot(label="IBOV")
   plt.legend();
-  print(carteira_valorização)
+   print(carteira_valorização)
 
 
 """Valor = float(input("Quanto deseja investir?"))
