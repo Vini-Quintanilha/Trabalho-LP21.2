@@ -111,15 +111,13 @@ class Aplicação():
         
         tabela = Functions.lista(True)
         tamanho = Functions.lista(False)
-        x = 0
 
         for x in range(tamanho):
             treeview = []
             treeview.append(tabela['Indice'].iloc[x])
             treeview.append(tabela['Cotação'].iloc[x])
 
-            self.lista.insert('', END, values = treeview)
-            print(x)        
+            self.lista.insert('', END, values = treeview)      
 
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.3, relheight = 0.25)
 
@@ -128,6 +126,7 @@ class Aplicação():
         self.scrol_lista.place(relx = 0.4, rely = 0.253, relwidth = 0.03, relheight = 0.25)
     
     def graficos(self, indice, porcentagem):
+        #Gráfico 1
         figura = Figure(figsize = (8, 4), dpi = 60)
         ax1 = figura.add_subplot(111)
 
@@ -139,6 +138,7 @@ class Aplicação():
 
         canvas = FigureCanvasTkAgg(figura, self.frame)
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
+        #Grafico 2
 
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)

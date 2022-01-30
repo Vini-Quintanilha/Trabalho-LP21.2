@@ -32,3 +32,7 @@ def lista(funcao):
     else:
         tamanho = len(indice)
         return tamanho
+
+def Ibovespa():
+    valor = yf.download('^BVSP', period="2y")["Adj Close"]
+    return valor
