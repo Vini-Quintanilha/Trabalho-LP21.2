@@ -39,6 +39,19 @@ def ibov_valorização():
    ibov = yf.download("^BVSP", period="10y")["Adj Close"]
    ibov_valorização = ibov / ibov.iloc[0]
    return ibov_valorização
+#----------------------------- saldo -------------------------
+def saldo(Valor_investido,tickers,porcentagem,valorização):
+ 
+   for i in range(len(porcentagem)):
+      porcentagem[i] = porcentagem[i] / 100
+
+   for i in range(len(tickers)):
+      acao = tickers[i]
+      multiplicador = porcentagem[i] * Valor_investido
+      valorização[acao] = valorização[acao].mul(multiplicador) 
+      valorização["saldo"] = valorização.sum(axis=1)
+   return valorização["saldo"]
+
 
 
 

@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from Libraries import Functions
+from ações import *
 
 #Inicializa um Objeto Tk
 app = Tk()
@@ -138,7 +139,17 @@ class Aplicação():
 
         canvas = FigureCanvasTkAgg(figura, self.frame)
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
+
         #Grafico 2
+        
+        figura2 = Figure(figsize = (8, 4), dpi = 60)
+        ax2 = figura2.add_subplot(111)
+        Carteira = carteira_valorização(indice)
+        ax2.plot(Carteira,figsize=(18,8),labels = indice)
+        ax2.set_title('{}'.format(self.nome))
+
+        canvas2 = FigureCanvasTkAgg(figura2, self.frame)
+        canvas2.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
 
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
