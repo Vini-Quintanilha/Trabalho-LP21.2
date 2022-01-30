@@ -60,7 +60,7 @@ def valorização_por_ativo():
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
   return(x)
 
-def ativos():
+"""def ativos():
    contador = 0
    acoes = []
    lista = lista()
@@ -81,9 +81,9 @@ def ativos():
         contador = 0
         print("Insira novamente")
         break
-         return acoes
+         return acoes"""
 
-def teste():
+"""def teste():
   Valor_investido = 100000
   acoes = [["ABEV3.SA", "ITSA4.SA","WEGE3.SA", "USIM5.SA", "VALE3.SA"],[0.1,0.2,0.3,0.2,0.2]]
   carteira_valorização = (carteira / carteira.iloc[0])
@@ -96,7 +96,7 @@ def teste():
   carteira_valorização["saldo"].plot(figsize=(18,8), label="Minha Carteira")
   ibov_valorização.plot(label="IBOV")
   plt.legend();
-   print(carteira_valorização)
+   print(carteira_valorização)"""
 
 
 """Valor = float(input("Quanto deseja investir?"))
