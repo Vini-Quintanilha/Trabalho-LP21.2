@@ -41,6 +41,7 @@ def ibov_valorização():
    return ibov_valorização
 
 
+
 def valorização_por_ativo():
   carteira_valorização = (carteira / carteira.iloc[0])
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
@@ -59,8 +60,8 @@ def ativos():
           if acao in linha:
              acao += ".SA"
              append.acoes[0](acao)
-            append.acoes[1](float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)")))
-            contador += (float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)"))
+             append.acoes[1](float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)")))
+             contador += float(input("Quantos por cento da carteira você gostaria de investir nessa ação?(Responda apenas com números)"))
         break
 
       else:
