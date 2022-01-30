@@ -1,10 +1,10 @@
-from optparse import Values
 from tkinter import *
 from tkinter import ttk
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from Libraries import Functions
 
 #Inicializa um Objeto Tk
 app = Tk()
@@ -100,17 +100,27 @@ class Aplicação():
         self.entry_4.place(relx = 0.1, rely = 0.609, relwidth = 0.05, relheight = 0.021)
 
     def treeview(self):
-        self.lista = ttk.Treeview(self.frame, height = 3, columns = ('col1', 'col2', 'col3'))
+        self.lista = ttk.Treeview(self.frame, height = 3, columns = ('col1', 'col2'))
         self.lista.heading('#0', text = '')
-        self.lista.heading('#1', text = 'Nome')
-        self.lista.heading('#2', text = 'Índice')
-        self.lista.heading('#3', text = 'Cotação R$')
+        self.lista.heading('#1', text = 'Índice')
+        self.lista.heading('#2', text = 'Cotação R$')
 
         self.lista.column('#0', width = 1)
-        self.lista.column('#1', width = 40)
-        self.lista.column('#2', width = 90)
-        self.lista.column('#3', width = 60)
+        self.lista.column('#1', width = 120)
+        self.lista.column('#2', width = 80)
         
+        tabela = Functions.lista(True)
+        tamanho = Functions.lista(False)
+        x = 0
+
+        for x in range(tamanho):
+            treeview = []
+            treeview.append(tabela['Indice'].iloc[x])
+            treeview.append(tabela['Cotação'].iloc[x])
+
+            self.lista.insert('', END, values = treeview)
+            print(x)        
+
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.3, relheight = 0.25)
 
         self.scrol_lista = Scrollbar(self.frame, orient = 'vertical')
@@ -129,7 +139,6 @@ class Aplicação():
 
         canvas = FigureCanvasTkAgg(figura, self.frame)
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
-
 
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
