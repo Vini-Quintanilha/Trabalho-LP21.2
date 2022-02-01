@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from Libraries import Functions
-from ações import *
 
 #Inicializa um Objeto Tk
 app = Tk()
@@ -141,10 +140,10 @@ class Aplicação():
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
 
         #Grafico 2
-        
+
         figura2 = Figure(figsize = (8, 4), dpi = 60)
         ax2 = figura2.add_subplot(111)
-        Carteira = carteira_valorização(indice)
+        Carteira = Functions.carteira_valorização(indice)
         ax2.plot(Carteira,figsize=(18,8),labels = indice)
         ax2.set_title('{}'.format(self.nome))
 
@@ -155,14 +154,14 @@ class Aplicação():
         
         figura3 = Figure(figsize = (8, 4), dpi = 60)
         ax3 = figura3.add_subplot(111)
-        acumulado = saldo(self.capital,indice,porcentagem,Carteira)
-        ibov_notempo = ibov_valorização()
+        acumulado = Functions.saldo(self.capital,indice,porcentagem,Carteira)
+        ibov_notempo = Functions.ibov_valorização()
         ax3.plot(acumulado,ibov_notempo,figsize=(18,8),labels = indice)
         ax3.set_title('{}'.format(self.nome))
 
         canvas3 = FigureCanvasTkAgg(figura3, self.frame)
         canvas3.get_tk_widget().place(relx = 0.4, rely = 0.68, relwidth = 0.3, relheight = 0.3)
-
+        
     def button(self):
         button_1 = Button(self.frame, text = 'Enviar', command = self.button_function_1)
         button_1.place(relx = 0.35, rely = 0.154, relwidth = 0.05, relheight = 0.04)

@@ -1,12 +1,14 @@
-from pandas_datareader import data as web
-import yfinance as yf
+import numpy as np 
 import pandas as pd
+import matplotlib.pyplot as plt
+import pandas_datareader.data as web
+import yfinance as yf
 
-#Recolhe os nomes da ações de um csv, afim de realizar busca.
-#OBS: Esse arquivo.csv pode ser encontrado no site da B3, 
-#procurei uma forma de atualizar a cada vez que aplicação fosse executada, 
-#porem não encontrei formas
-#site: https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br
+# ------------------------- Tratamento de dados ------------------------- #
+
+# True --> Retorna uma tabela(datadrame) com os índices e as devidas cotações
+# False --> Retorna a tamanho da lista de índices
+
 def lista(funcao):
     indice = []
     cotacao = []
@@ -33,6 +35,72 @@ def lista(funcao):
         tamanho = len(indice)
         return tamanho
 
-def Ibovespa():
-    valor = yf.download('^BVSP', period="2y")["Adj Close"]
-    return valor
+# ---------------------------- Gráfico Ibov ----------------------------- #
+
+def grafico_ibov():
+   ibov = web.get_data_yahoo('^BVSP')
+   ibov = ibov[(ibov.index.year >= 2020)]
+   plt.title(' TÍTULO ')
+   x = ibov["Close"].plot(figsize=(22,8), label="IBOV",linewidth=3.0)
+   plt.ylabel('Valorização')
+   plt.xlabel('Ano')
+   plt.legend(loc='best')
+
+# ----------------------------- carteira -------------------------------- #
+
+def carteira(tickers):
+   for i in range(len(tickers)):
+      tickers[i] = tickers[i] + '.SA'
+   carteira = yf.download(tickers, period="10y")["Adj Close"]
+   return carteira
+
+# ------------------------ carteira Valorização ------------------------- #
+
+def carteira_valorização():
+   indice = []
+
+   with open('Files/IBOV.csv', 'r') as arquivo:
+      for linha in arquivo:
+         pos = linha.index(';')+1
+         acao = linha[0:pos-1] + '.SA'
+         indice.append(acao)
+
+   carteira = yf.download(indice, period="10y")["Adj Close"]
+   valorização = carteira / carteira.iloc[0]
+   return valorização
+
+# -------------------------------- ibov --------------------------------- #
+
+def ibov():
+   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+   return ibov
+
+# -------------------------- ibov Valorização --------------------------- #
+
+def ibov_valorização():
+   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+   ibov_valorização = ibov / ibov.iloc[0]
+   return ibov_valorização
+
+# ------------------------------- saldo --------------------------------- #
+
+def saldo(Valor_investido,tickers,porcentagem,valorização):
+ 
+   for i in range(len(porcentagem)):
+      porcentagem[i] = porcentagem[i] / 100
+
+   for i in range(len(tickers)):
+      acao = tickers[i]
+      multiplicador = porcentagem[i] * Valor_investido
+      valorização[acao] = valorização[acao].mul(multiplicador) 
+      valorização["saldo"] = valorização.sum(axis=1)
+   return valorização["saldo"]
+
+# -----------------------   Valorização Ativo --------------------------- #
+
+def valorização_por_ativo():
+  carteira_valorização = (carteira / carteira.iloc[0])
+  x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
+  return(x)
+
+print(carteira_valorização())
