@@ -140,16 +140,16 @@ class Aplicação():
         canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.3, relheight = 0.3)
 
         #Grafico 2
-        '''
-        figura2 = Figure(figsize = (8, 4), dpi = 60)
-        ax2 = figura2.add_subplot(111)
-        Carteira = Functions.carteira_valorização()
-        ax2.plot(Carteira,figsize=(18,8),labels = self.indice)
-        ax2.set_title('{}'.format(self.nome))
+        if self.porcentagem_restante == 0:     
+            figura2 = Figure(figsize = (8, 4), dpi = 60)
+            ax2 = figura2.add_subplot(111)
+            Carteira = Functions.carteira_valorização(self.indice)
+            ax2.plot(Carteira,figsize=(18,8),labels = self.indice)
+            ax2.set_title('{}'.format(self.nome))
 
-        canvas2 = FigureCanvasTkAgg(figura2, self.frame)
-        canvas2.get_tk_widget().place(relx = 0.1, rely = 0.59, relwidth = 0.3, relheight = 0.3)
-
+            canvas2 = FigureCanvasTkAgg(figura2, self.frame)
+            canvas2.get_tk_widget().place(relx = 0.1, rely = 0.59, relwidth = 0.3, relheight = 0.3)
+        ''''
         #Grafico 3
         figura3 = Figure(figsize = (8, 4), dpi = 60)
         ax3 = figura3.add_subplot(111)

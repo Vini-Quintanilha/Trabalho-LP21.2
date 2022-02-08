@@ -56,14 +56,7 @@ def carteira(tickers):
 
 # ------------------------ carteira Valorização ------------------------- #
 
-def carteira_valorização():
-   indice = []
-
-   with open('Files/IBOV.csv', 'r') as arquivo:
-      for linha in arquivo:
-         pos = linha.index(';')+1
-         acao = linha[0:pos-1] + '.SA'
-         indice.append(acao)
+def carteira_valorização(indice):
 
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
