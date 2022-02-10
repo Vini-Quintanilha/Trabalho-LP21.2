@@ -60,7 +60,9 @@ def carteira_valorização(indice):
 
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
-   return valorização
+   
+   valorização.plot()
+   plt.show()
 
 # -------------------------------- ibov --------------------------------- #
 
@@ -95,5 +97,3 @@ def valorização_por_ativo():
   carteira_valorização = (carteira / carteira.iloc[0])
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
   return(x)
-
-print(carteira_valorização())
