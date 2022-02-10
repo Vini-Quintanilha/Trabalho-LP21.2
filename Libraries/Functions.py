@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader.data as web
 import yfinance as yf
-import plotly.express as px
 
 
 # ------------------------- Tratamento de dados ------------------------- #
@@ -64,8 +63,6 @@ def carteira_valorização(indice):
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
    valorização.plot(figsize=(10,4), label="Minhas ações")
-   valorização.set_xlabel('Dias')
-   valorização.set_xlabel('Dias')
    plt.legend(loc='upper left')
    plt.show()
 
@@ -112,9 +109,9 @@ def valorização_por_ativo():
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
   return(x)
 
-investido = 10000
+"""investido = 10000
 tickers = ["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]
 porcentagem = [30,40,30]
 valorização =carteira_valorização(tickers)
-saldo(investido,tickers,porcentagem,valorização)
-#carteira_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"])
+saldo(investido,tickers,porcentagem,valorização)"""
+carteira_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"])
