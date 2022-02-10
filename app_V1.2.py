@@ -139,11 +139,14 @@ class Aplicação():
         button_2 = Button(self.frame, text = 'Enviar', command = self.button_2)
         button_2.place(relx = 0.65, rely = 0.59, relwidth = 0.15, relheight = 0.04)
 
-        button_3 = Button(self.frame, text = 'Gráfico das Ações', command = self.button_3)
-        button_3.place(relx = 0.1, rely = 0.95, relwidth = 0.3, relheight = 0.04)
+        button_3 = Button(self.frame, text = 'Gráfico Ações', command = self.button_3)
+        button_3.place(relx = 0.1, rely = 0.95, relwidth = 0.20, relheight = 0.04)
     
-        button_4 = Button(self.frame, text = 'Carteira VS Ibovespa', command = self.button_4)
-        button_4.place(relx = 0.45, rely = 0.95, relwidth = 0.35, relheight = 0.04)
+        button_4 = Button(self.frame, text = 'Gráfico Ações-IBOV', command = self.button_4)
+        button_4.place(relx = 0.33, rely = 0.95, relwidth = 0.30, relheight = 0.04)
+
+        button_5 = Button(self.frame, text = 'Recomeçar', command = self.button_5)
+        button_5.place(relx = 0.66, rely = 0.95, relwidth = 0.20, relheight = 0.04)
 
     def button_1(self):
         self.nome.append(self.entry_1.get())
@@ -157,7 +160,7 @@ class Aplicação():
             messagebox.showerror(title = 'Erro', message = 'Porcentagem Digitada Acima do Limite')
 
         elif self.porcentagem_restante != 0:
-            self.indice.append(self.entry_3.get())
+            self.indice.append(self.entry_3.get().upper() + '.SA')
             self.porcentagem.append(self.entry_4.get())
 
             self.entry_3.delete(0, END)
@@ -170,11 +173,38 @@ class Aplicação():
             label_acao.place(relx = 0.535, rely = 0.545, relwidth = 0.2, relheight = 0.026)  
     
     def button_3(self):
-        Functions.graf_valorização(self.indice)
+        if self.porcentagem_restante == 0:
+            Functions.graf_valorização(self.indice)
+        elif self.porcentagem_restante >= 1:
+            messagebox.showerror(title = 'Erro', message = 'Capital Disponível é superior 1%')
 
     def button_4(self):
-        Functions.saldo(self.capital, self.indice, self.porcentagem, Functions.carteira_valorização(self.indice))
+        if self.porcentagem_restante == 0:
+            Functions.saldo(self.capital, self.indice, self.porcentagem, Functions.carteira_valorização(self.indice))
+        elif self.porcentagem_restante >= 1:
+            messagebox.showerror(title = 'Erro', message = 'Capital Disponível é superior 1%')
     
+    def button_5(self):
+        resultado = messagebox.askquestion(title = 'Confirmação', message = 'Deseja Recomeçar?')
+        
+        if resultado == 'yes':
+            self.indice.clear()
+            self.porcentagem.clear
+            self.nome.clear
+            self.capital = 0
+            self.porcentagem_restante = 100
+
+            self.entry_1.delete(0, END)
+            self.entry_2.delete(0, END)
+            self.entry_3.delete(0, END)
+            self.entry_4.delete(0, END)
+
+            label_acao = Label(self.frame, text = '{}%'.format(self.porcentagem_restante), font = ('Times', 12))
+            label_acao.place(relx = 0.535, rely = 0.545, relwidth = 0.2, relheight = 0.026) 
+            
+            for item in self.canvas.get_tk_widget().find_all():
+                self.canvas.get_tk_widget().delete(item)
+
     def porcentagem_(self):
         pos = len(self.porcentagem)
         porcentagem = int(self.porcentagem[pos - 1])
@@ -183,16 +213,16 @@ class Aplicação():
 
     def graficos(self, indice, porcentagem):
         #Gráfico 1
-        figura = Figure(figsize = (8, 4), dpi = 60)
-        ax1 = figura.add_subplot(111)
+        self.figura = Figure(figsize = (8, 4), dpi = 60)
+        self.ax1 = self.figura.add_subplot(111)
 
-        ax1.pie(porcentagem, labels = indice, autopct='%1.1f%%',
+        self.ax1.pie(porcentagem, labels = indice, autopct='%1.1f%%',
         shadow=True, startangle=90)
 
-        ax1.set_title('{}'.format(self.nome))
-        ax1.axis('equal')
+        self.ax1.set_title('{}'.format(self.nome))
+        self.ax1.axis('equal')
 
-        canvas = FigureCanvasTkAgg(figura, self.frame)
-        canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.7, relheight = 0.25)
+        self.canvas = FigureCanvasTkAgg(self.figura, self.frame)
+        self.canvas.get_tk_widget().place(relx = 0.1, rely = 0.68, relwidth = 0.7, relheight = 0.25)
 
 Aplicação()
