@@ -48,7 +48,7 @@ def grafico_ibov():
    plt.legend(loc='best')
 
 # ----------------------------- carteira -------------------------------- #
-
+#Não está usando
 def carteira(tickers):
    for i in range(len(tickers)):
       tickers[i] = tickers[i] + '.SA'
@@ -107,7 +107,7 @@ def saldo(Valor_investido,tickers,porcentagem,valorização):
    plt.show()
 
 # -----------------------   Valorização Ativo --------------------------- #
-
+#Não está usando
 def valorização_por_ativo():
   carteira_valorização = (carteira / carteira.iloc[0])
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
