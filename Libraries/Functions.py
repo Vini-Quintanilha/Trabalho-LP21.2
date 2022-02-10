@@ -67,7 +67,7 @@ def carteira_valorização(indice):
 
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
-   valorização.plot(figsize=(10,4), label="Minhas ações",title = "Valorização",xlabel = 'Data')
+   valorização.plot(figsize=(10,4), label="Minhas ações",title = "Valorização",xlabel = 'Data', ylabel = 'Valorização')
    plt.legend(ncol = 2)
    plt.show()
 
@@ -98,12 +98,12 @@ def saldo(Valor_investido,tickers,porcentagem,valorização):
       valorização[acao] = valorização[acao].mul(multiplicador) 
 
    valorização["saldo"] = valorização.sum(axis=1)
-   valorização["saldo"].plot(figsize=(10,4), xlabel = 'Data', label="Minha Carteira", title = "Comparação")
-
+   valorização["saldo"].plot(figsize=(10,4), xlabel = 'Data', label="Minha Carteira", title = "Comparação",ylabel = 'Valorização')
+   
    ibov = yf.download("^BVSP", period="10y")["Adj Close"]
    ibov_valorização = ibov / ibov.iloc[0]
    ibov_valorização *= Valor_investido
-   ibov_valorização.plot(label="IBOV",xlabel = 'Data')
+   ibov_valorização.plot(label="IBOV",xlabel = 'Data',ylabel = 'Valorização')
    plt.legend(loc='upper left')
    plt.show()
 
