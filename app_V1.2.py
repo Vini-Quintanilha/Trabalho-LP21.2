@@ -115,7 +115,6 @@ class Aplicação():
         self.lista.column('#1', width = 120)
         self.lista.column('#2', width = 80)
         
-        ''' 
         tabela = Functions.lista(True)
         tamanho = Functions.lista(False)
 
@@ -125,7 +124,7 @@ class Aplicação():
             treeview.append(tabela['Cotação'].iloc[x])
 
             self.lista.insert('', END, values = treeview)      
-        '''
+        
         self.lista.place(relx = 0.1, rely = 0.253, relwidth = 0.7, relheight = 0.25)
 
         self.scrol_lista = Scrollbar(self.frame, orient = 'vertical')
