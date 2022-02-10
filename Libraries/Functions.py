@@ -90,11 +90,11 @@ def ibov_valorização():
 def saldo(Valor_investido,tickers,porcentagem,valorização):
  
    for i in range(len(porcentagem)):
-      porcentagem[i] = porcentagem[i] / 100
+      porcentagem[i] = int(porcentagem[i]) / 100
 
    for i in range(len(tickers)):
       acao = tickers[i]
-      multiplicador = porcentagem[i] * Valor_investido
+      multiplicador = int(porcentagem[i]) * Valor_investido
       valorização[acao] = valorização[acao].mul(multiplicador) 
 
    valorização["saldo"] = valorização.sum(axis=1)
@@ -112,8 +112,3 @@ def valorização_por_ativo():
   carteira_valorização = (carteira / carteira.iloc[0])
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
   return(x)
-
-
-saldo(10000,["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"],[10,40,10,10,30],carteira_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]))
-"""
-graf_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"])"""
