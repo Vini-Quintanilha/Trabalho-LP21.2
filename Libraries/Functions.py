@@ -55,19 +55,19 @@ def carteira(tickers):
    carteira = yf.download(tickers, period="10y")["Adj Close"]
    return carteira
 
-
-def teste(indice):
+# ------------------------ carteira_valorização ------------------------- #
+def carteira_valorização(indice):
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
    return valorização
-# ------------------------ carteira Valorização ------------------------- #
+# ------------------------ carteira Valorização ------------------------- #]
+
 # Graf 2
 
-def carteira_valorização(indice):
+def graf_valorização(indice):
 
-   carteira = yf.download(indice, period="10y")["Adj Close"]
-   valorização = carteira / carteira.iloc[0]
-   valorização.plot(figsize=(10,4), label="Minhas ações",title = "Valorização",xlabel = 'Data', ylabel = 'Valorização')
+   carteira = carteira_valorização(indice)
+   carteira.plot(figsize=(10,4), label="Minhas ações",title = "Valorização",xlabel = 'Data', ylabel = 'Valorização')
    plt.legend(ncol = 2)
    plt.show()
 
@@ -82,8 +82,8 @@ def ibov():
 def ibov_valorização():
    ibov = yf.download("^BVSP", period="10y")["Adj Close"]
    ibov_valorização = ibov / ibov.iloc[0]
-   ibov_valorização.plot()
-   plt.show()
+   return ibov_valorização
+   
 # ------------------------------- saldo --------------------------------- #
 # graf 3
 
@@ -100,10 +100,9 @@ def saldo(Valor_investido,tickers,porcentagem,valorização):
    valorização["saldo"] = valorização.sum(axis=1)
    valorização["saldo"].plot(figsize=(10,4), xlabel = 'Data', label="Minha Carteira", title = "Comparação",ylabel = 'Valorização')
    
-   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
-   ibov_valorização = ibov / ibov.iloc[0]
-   ibov_valorização *= Valor_investido
-   ibov_valorização.plot(label="IBOV",xlabel = 'Data',ylabel = 'Valorização')
+   ibov_val= ibov_valorização() * Valor_investido
+   
+   ibov_val.plot(label="IBOV",xlabel = 'Data',ylabel = 'Valorização')
    plt.legend(loc='upper left')
    plt.show()
 
@@ -115,4 +114,6 @@ def valorização_por_ativo():
   return(x)
 
 
-saldo(10000,["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"],[10,40,10,10,30],teste(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]))
+saldo(10000,["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"],[10,40,10,10,30],carteira_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]))
+"""
+graf_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"])"""
