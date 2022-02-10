@@ -6,6 +6,8 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from Libraries import Functions
 
+#--------------------------------------------------APAGAR-----------------------------------------------------------------------
+
 #Inicializa um Objeto Tk
 #menu = Tk()
 
