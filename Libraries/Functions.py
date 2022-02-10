@@ -55,6 +55,11 @@ def carteira(tickers):
    carteira = yf.download(tickers, period="10y")["Adj Close"]
    return carteira
 
+
+def teste(indice):
+   carteira = yf.download(indice, period="10y")["Adj Close"]
+   valorização = carteira / carteira.iloc[0]
+   return valorização
 # ------------------------ carteira Valorização ------------------------- #
 # Graf 2
 
@@ -62,8 +67,8 @@ def carteira_valorização(indice):
 
    carteira = yf.download(indice, period="10y")["Adj Close"]
    valorização = carteira / carteira.iloc[0]
-   valorização.plot(figsize=(10,4), label="Minhas ações")
-   plt.legend(loc='upper left')
+   valorização.plot(figsize=(10,4), label="Minhas ações",title = "Valorização",xlabel = 'Data')
+   plt.legend(ncol = 2)
    plt.show()
 
 # -------------------------------- ibov --------------------------------- #
@@ -91,16 +96,16 @@ def saldo(Valor_investido,tickers,porcentagem,valorização):
       acao = tickers[i]
       multiplicador = porcentagem[i] * Valor_investido
       valorização[acao] = valorização[acao].mul(multiplicador) 
-      valorização["saldo"] = valorização.sum(axis=1)
-      valorização["saldo"].plot(figsize=(10,4), label="Minha Carteira")
 
-      ibov = yf.download("^BVSP", period="10y")["Adj Close"]
-      ibov_valorização = ibov / ibov.iloc[0]
-      ibov_valorização *= Valor_investido
-      ibov_valorização.plot(label="IBOV")
+   valorização["saldo"] = valorização.sum(axis=1)
+   valorização["saldo"].plot(figsize=(10,4), xlabel = 'Data', label="Minha Carteira", title = "Comparação")
 
-      plt.legend(loc='upper left')
-      plt.show()
+   ibov = yf.download("^BVSP", period="10y")["Adj Close"]
+   ibov_valorização = ibov / ibov.iloc[0]
+   ibov_valorização *= Valor_investido
+   ibov_valorização.plot(label="IBOV",xlabel = 'Data')
+   plt.legend(loc='upper left')
+   plt.show()
 
 # -----------------------   Valorização Ativo --------------------------- #
 
@@ -109,9 +114,5 @@ def valorização_por_ativo():
   x = carteira_valorização.plot(figsize=(18,8),label="Carteira",linewidth=3.0,xlabel = 'Data',title = "Carteira")
   return(x)
 
-"""investido = 10000
-tickers = ["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]
-porcentagem = [30,40,30]
-valorização =carteira_valorização(tickers)
-saldo(investido,tickers,porcentagem,valorização)"""
-carteira_valorização(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"])
+
+saldo(10000,["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"],[10,40,10,10,30],teste(["ABEV3.SA","ITSA4.SA","WEGE3.SA","USIM5.SA","VALE3.SA"]))
